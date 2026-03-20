@@ -14,7 +14,8 @@ import FeatureCards from "@/components/dashboard/FeatureCards";
 
 const ChartIntelligence = lazy(() => import("@/components/ChartIntelligence"));
 const MarketChat = lazy(() => import("@/components/MarketChat"));
-const AIVideoEngine = lazy(() => import("@/components/AIVideoEngine"));
+const AIVideoBriefing = lazy(() => import("@/components/AIVideoBriefing"));
+const FinfluencerDetector = lazy(() => import("@/components/FinfluencerDetector"));
 const WhatIfScenarioEngine = lazy(() => import("@/components/WhatIfScenarioEngine"));
 
 const SectionLoader = () => (
@@ -23,7 +24,7 @@ const SectionLoader = () => (
   </div>
 );
 
-const sceneIds = ["overview", "event", "explain", "impact", "validate", "scenario"];
+const sceneIds = ["overview", "event", "explain", "impact", "video", "validate", "scenario"];
 
 const Dashboard = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -93,7 +94,7 @@ const Dashboard = () => {
                   Intelligence Dashboard
                 </h1>
                 <p className="text-text-secondary text-sm max-w-lg">
-                  Five AI layers working together to give you an edge. Scroll down to dive into each module.
+                  Six AI layers working together to give you an edge. Scroll down to dive into each module.
                 </p>
               </motion.div>
 
@@ -147,7 +148,7 @@ const Dashboard = () => {
           </div>
         </section>
 
-        {/* ── SCENE 1–5: MODULES ── */}
+        {/* ── SCENE 1–6: MODULES ── */}
         <section id="event" className="scroll-snap-section">
           <OpportunityRadar selectedEventId={selectedEventId} onSelectEvent={setSelectedEventId} onContinue={() => navigateTo(2)} />
         </section>
@@ -157,8 +158,11 @@ const Dashboard = () => {
         <section id="impact" className="scroll-snap-section">
           <Suspense fallback={<SectionLoader />}><MarketChat eventId={selectedEventId} /></Suspense>
         </section>
+        <section id="video" className="scroll-snap-section">
+          <Suspense fallback={<SectionLoader />}><AIVideoBriefing /></Suspense>
+        </section>
         <section id="validate" className="scroll-snap-section">
-          <Suspense fallback={<SectionLoader />}><AIVideoEngine eventId={selectedEventId} /></Suspense>
+          <Suspense fallback={<SectionLoader />}><FinfluencerDetector eventId={selectedEventId} /></Suspense>
         </section>
         <section id="scenario" className="scroll-snap-section">
           <Suspense fallback={<SectionLoader />}><WhatIfScenarioEngine /></Suspense>
