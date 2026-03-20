@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import etEdgeLogo from "@/assets/et-edge-logo.png";
 
 const RocketHero = () => {
   const navigate = useNavigate();
@@ -101,6 +102,15 @@ const RocketHero = () => {
       {/* ── HERO TEXT ── */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
         {/* Main title — ET Edge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, filter: "blur(12px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-6"
+        >
+          <img src={etEdgeLogo} alt="ET Edge" className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto drop-shadow-[0_0_40px_hsl(var(--neon-cyan)/0.4)]" />
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.9, filter: "blur(12px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}

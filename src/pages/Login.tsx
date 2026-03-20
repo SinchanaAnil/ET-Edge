@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import etEdgeLogo from "@/assets/et-edge-logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const Login = () => {
             boxShadow: "0 0 80px hsl(var(--accent) / 0.06), 0 24px 48px hsl(var(--background) / 0.5)",
           }}
         >
+          <img src={etEdgeLogo} alt="ET Edge" className="w-20 h-20 mx-auto mb-4 drop-shadow-[0_0_20px_hsl(var(--neon-cyan)/0.3)]" />
           {/* Brand */}
           <h1 className="font-display text-3xl font-bold mb-1">
             <span
