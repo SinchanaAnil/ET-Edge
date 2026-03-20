@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import etEdgeLogo from "@/assets/et-edge-logo.png";
 
 const RocketHero = () => {
   const navigate = useNavigate();
