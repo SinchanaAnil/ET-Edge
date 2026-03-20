@@ -6,6 +6,10 @@ import CursorGlow from "@/components/CursorGlow";
 import ScrollProgress from "@/components/ScrollProgress";
 import OpportunityRadar from "@/components/OpportunityRadar";
 import MarketOverview from "@/components/dashboard/MarketOverview";
+import MarketCards from "@/components/dashboard/MarketCards";
+import StockChart from "@/components/dashboard/StockChart";
+import EventHighlights from "@/components/dashboard/EventHighlights";
+import LearningLoop from "@/components/dashboard/LearningLoop";
 import FeatureCards from "@/components/dashboard/FeatureCards";
 
 const ChartIntelligence = lazy(() => import("@/components/ChartIntelligence"));
@@ -83,7 +87,7 @@ const Dashboard = () => {
                 initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="mb-6"
+                className="mb-5"
               >
                 <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2" style={{ textWrap: "balance" } as React.CSSProperties}>
                   Intelligence Dashboard
@@ -93,8 +97,26 @@ const Dashboard = () => {
                 </p>
               </motion.div>
 
-              {/* Data-rich market overview */}
+              {/* Market index cards */}
+              <div className="mb-4">
+                <MarketCards />
+              </div>
+
+              {/* Main market overview: NIFTY chart + movers + signals */}
               <MarketOverview />
+
+              {/* Secondary row: stock chart + events + AI accuracy */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-6">
+                <div className="lg:col-span-5">
+                  <StockChart />
+                </div>
+                <div className="lg:col-span-4">
+                  <EventHighlights />
+                </div>
+                <div className="lg:col-span-3">
+                  <LearningLoop />
+                </div>
+              </div>
 
               {/* Feature cards */}
               <FeatureCards onNavigate={navigateTo} />
