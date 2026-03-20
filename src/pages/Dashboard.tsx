@@ -6,6 +6,10 @@ import CursorGlow from "@/components/CursorGlow";
 import ScrollProgress from "@/components/ScrollProgress";
 import OpportunityRadar from "@/components/OpportunityRadar";
 import MarketOverview from "@/components/dashboard/MarketOverview";
+import MarketCards from "@/components/dashboard/MarketCards";
+import StockChart from "@/components/dashboard/StockChart";
+import EventHighlights from "@/components/dashboard/EventHighlights";
+import LearningLoop from "@/components/dashboard/LearningLoop";
 import FeatureCards from "@/components/dashboard/FeatureCards";
 
 const ChartIntelligence = lazy(() => import("@/components/ChartIntelligence"));
