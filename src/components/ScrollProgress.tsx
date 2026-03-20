@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { LayoutGrid, Radio, Brain, BarChart3, Shield, GitFork } from "lucide-react";
+import { LayoutGrid, Radio, Brain, BarChart3, Video, Shield, GitFork } from "lucide-react";
 
 interface ScrollProgressProps {
   activeIndex: number;
@@ -8,13 +8,14 @@ interface ScrollProgressProps {
   labels?: string[];
 }
 
-const defaultLabels = ["overview", "event", "explain", "impact", "validate", "scenario"];
+const defaultLabels = ["overview", "event", "explain", "impact", "video", "validate", "scenario"];
 
 const moduleConfig = [
   { icon: LayoutGrid, label: "Dashboard" },
   { icon: Radio, label: "Event Intelligence" },
   { icon: Brain, label: "Explainability" },
   { icon: BarChart3, label: "Portfolio Impact" },
+  { icon: Video, label: "AI Video Brief" },
   { icon: Shield, label: "Finfluencer Detector" },
   { icon: GitFork, label: "What-if Engine" },
 ];

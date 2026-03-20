@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { intelligenceEvents } from "@/data/intelligence";
 
-interface AIVideoEngineProps {
+interface FinfluencerDetectorProps {
   eventId: string;
 }
 
@@ -53,7 +53,59 @@ const analyzeTip = (tip: string, eventTitle: string) => {
   };
 };
 
-const AIVideoEngine = ({ eventId }: AIVideoEngineProps) => {
+/* Circular SVG progress ring */
+const CircularScore = ({ score, verdict }: { score: number; verdict: keyof typeof verdictStyles }) => {
+  const radius = 54;
+  const stroke = 5;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (score / 100) * circumference;
+
+  const colorMap = {
+    Valid: "hsl(var(--success))",
+    Misleading: "hsl(var(--warning))",
+    False: "hsl(var(--critical))",
+  };
+  const glowMap = {
+    Valid: "drop-shadow(0 0 8px hsl(var(--success) / 0.5))",
+    Misleading: "drop-shadow(0 0 8px hsl(var(--warning) / 0.5))",
+    False: "drop-shadow(0 0 8px hsl(var(--critical) / 0.5))",
+  };
+
+  return (
+    <div className="relative flex items-center justify-center w-36 h-36">
+      <svg width="132" height="132" viewBox="0 0 132 132" className="transform -rotate-90" style={{ filter: glowMap[verdict] }}>
+        <circle cx="66" cy="66" r={radius} fill="none" stroke="hsl(var(--border) / 0.2)" strokeWidth={stroke} />
+        <motion.circle
+          cx="66"
+          cy="66"
+          r={radius}
+          fill="none"
+          stroke={colorMap[verdict]}
+          strokeWidth={stroke}
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          initial={{ strokeDashoffset: circumference }}
+          animate={{ strokeDashoffset: offset }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+        />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <motion.span
+          key={score}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+          className="font-display text-4xl text-foreground"
+        >
+          {score}
+        </motion.span>
+        <span className="text-[10px] uppercase tracking-[0.24em] text-text-secondary mt-1">score</span>
+      </div>
+    </div>
+  );
+};
+
+const FinfluencerDetector = ({ eventId }: FinfluencerDetectorProps) => {
   const event = intelligenceEvents.find((item) => item.id === eventId) ?? intelligenceEvents[0];
   const [tipInput, setTipInput] = useState("Sure shot multibagger: RBI rate hike means every bank stock will rally tomorrow.");
   const [error, setError] = useState("");
@@ -64,12 +116,10 @@ const AIVideoEngine = ({ eventId }: AIVideoEngineProps) => {
 
   const handleAnalyze = () => {
     const parsed = tipSchema.safeParse(tipInput);
-
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? "Please review the tip before analyzing.");
       return;
     }
-
     setError("");
     setSubmittedTip(parsed.data);
   };
@@ -95,7 +145,7 @@ const AIVideoEngine = ({ eventId }: AIVideoEngineProps) => {
       <div className="relative z-10 mx-auto flex min-h-[calc(100vh-12rem)] max-w-7xl flex-col justify-center gap-8">
         <div className="max-w-4xl">
           <Badge variant="outline" className="border-border/40 bg-secondary/40 px-4 py-1 text-[0.65rem] uppercase tracking-[0.32em] text-text-secondary">
-            Finfluencer BS Detector
+            Finfluencer Detector
           </Badge>
           <h2 className="mt-6 font-display text-4xl leading-[0.94] text-foreground md:text-6xl">Stress-test the claim before the claim manipulates you.</h2>
           <p className="mt-5 max-w-3xl text-base leading-8 text-text-secondary md:text-lg">
@@ -135,19 +185,11 @@ const AIVideoEngine = ({ eventId }: AIVideoEngineProps) => {
               className="glass rounded-[2rem] border border-border/30 p-8"
             >
               <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.28em] text-text-secondary">Validation result</p>
-                  <div className="mt-4 flex items-end gap-4">
-                    <motion.p
-                      key={result.score}
-                      initial={{ opacity: 0, y: 18 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                      className="font-display text-6xl text-foreground md:text-7xl"
-                    >
-                      {result.score}
-                    </motion.p>
-                    <span className="pb-3 text-sm uppercase tracking-[0.24em] text-text-secondary">validity score</span>
+                <div className="flex items-center gap-6">
+                  <CircularScore score={result.score} verdict={result.verdict} />
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.28em] text-text-secondary">Validation result</p>
+                    <span className="text-sm uppercase tracking-[0.24em] text-text-secondary mt-1 block">validity score</span>
                   </div>
                 </div>
                 <Badge variant="outline" className={`rounded-full px-4 py-1 text-xs ${verdictStyles[result.verdict]}`}>
@@ -193,4 +235,4 @@ const AIVideoEngine = ({ eventId }: AIVideoEngineProps) => {
   );
 };
 
-export default AIVideoEngine;
+export default FinfluencerDetector;
