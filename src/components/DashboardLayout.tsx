@@ -24,7 +24,7 @@ const DashboardLayout = () => {
           onClick={() => navigate("/")}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-300"
         >
-          <img src={etEdgeLogo} alt="ET Edge" className="w-8 h-8 drop-shadow-[0_0_8px_hsl(var(--neon-cyan)/0.3)]" />
+          <img src={etEdgeLogo} alt="ET Edge" className="w-8 h-8 rounded-full object-cover drop-shadow-[0_0_8px_hsl(var(--neon-cyan)/0.3)]" />
           <span className="font-display text-sm font-bold tracking-wide">
             <span style={{ background: "linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(var(--teal)))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>ET</span>
             {" "}
