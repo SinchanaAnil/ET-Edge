@@ -71,11 +71,10 @@ const Login = () => {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-shadow duration-300"
+              className="w-full px-4 py-3 rounded-xl text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-shadow duration-300"
               style={{
                 background: "hsl(var(--input))",
                 border: "1px solid hsl(var(--border))",
-                focusRingColor: "hsl(var(--accent))",
               }}
               required
             />
