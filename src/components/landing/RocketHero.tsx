@@ -12,152 +12,158 @@ const RocketHero = () => {
 
       {/* Ambient orbs */}
       <motion.div
-        className="absolute w-[700px] h-[700px] rounded-full bg-deep-purple/25 blur-[200px]"
+        className="absolute w-[700px] h-[700px] rounded-full blur-[200px]"
+        style={{ top: "5%", left: "10%", background: "hsl(var(--deep-purple) / 0.25)" }}
         animate={{ x: [0, 50, 0], y: [0, -40, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        style={{ top: "5%", left: "10%" }}
       />
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full bg-teal/20 blur-[180px]"
+        className="absolute w-[500px] h-[500px] rounded-full blur-[180px]"
+        style={{ bottom: "5%", right: "5%", background: "hsl(var(--teal) / 0.20)" }}
         animate={{ x: [0, -35, 0], y: [0, 50, 0] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        style={{ bottom: "5%", right: "5%" }}
       />
 
-      {/* ── ROCKET / BEAM ANIMATION ── */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        {/* Main beam column */}
+      {/* ── ROCKET ANIMATION ── */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Rocket body — loops upward */}
         <motion.div
-          className="relative"
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "55vh", opacity: 1 }}
-          transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          className="absolute left-1/2 -translate-x-1/2"
+          animate={{ bottom: ["5%", "85%"] }}
+          transition={{ duration: 6, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Core beam */}
-          <div className="absolute left-1/2 -translate-x-1/2 w-[2px] h-full">
-            <div className="absolute inset-0 bg-gradient-to-t from-accent/80 via-neon-cyan/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-accent/40 via-neon-cyan/20 to-transparent blur-sm" />
-          </div>
-
-          {/* Wide glow aura */}
-          <div className="absolute left-1/2 -translate-x-1/2 w-16 h-full bg-gradient-to-t from-accent/15 via-neon-cyan/8 to-transparent blur-2xl" />
-          <div className="absolute left-1/2 -translate-x-1/2 w-32 h-full bg-gradient-to-t from-accent/8 via-teal/4 to-transparent blur-3xl" />
-
-          {/* Rocket head — glowing orb at top */}
-          <motion.div
-            className="absolute left-1/2 -translate-x-1/2 -top-4"
-            initial={{ opacity: 0, scale: 0.3 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="w-8 h-8 rounded-full bg-accent/70 blur-md" />
-            <div className="absolute inset-0 w-8 h-8 rounded-full bg-neon-cyan/50 blur-lg" />
-            <div className="absolute inset-1 w-6 h-6 rounded-full bg-accent" />
-          </motion.div>
-
-          {/* Exhaust flare at bottom */}
-          <motion.div
-            className="absolute left-1/2 -translate-x-1/2 -bottom-6"
-            initial={{ opacity: 0, scaleY: 0 }}
-            animate={{ opacity: [0, 0.8, 0.5], scaleY: [0, 1.2, 1] }}
-            transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
-          >
-            <div className="w-6 h-16 bg-gradient-to-b from-accent/60 via-teal/30 to-transparent blur-md rounded-full" />
-          </motion.div>
+          {/* Rocket glow */}
+          <div
+            className="w-3 h-10 rounded-full"
+            style={{
+              background: "linear-gradient(to top, hsl(var(--accent) / 0.9), hsl(var(--neon-cyan) / 0.6), transparent)",
+              boxShadow: "0 0 20px hsl(var(--accent) / 0.5), 0 0 60px hsl(var(--accent) / 0.2)",
+            }}
+          />
+          {/* Rocket head */}
+          <div
+            className="absolute -top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full"
+            style={{ background: "hsl(var(--neon-cyan))", boxShadow: "0 0 12px hsl(var(--neon-cyan) / 0.8)" }}
+          />
+          {/* Exhaust trail */}
+          <div
+            className="absolute top-full left-1/2 -translate-x-1/2 w-1 h-24 blur-sm"
+            style={{ background: "linear-gradient(to bottom, hsl(var(--accent) / 0.5), transparent)" }}
+          />
+          {/* Wider glow trail */}
+          <div
+            className="absolute top-full left-1/2 -translate-x-1/2 w-8 h-32 blur-xl"
+            style={{ background: "linear-gradient(to bottom, hsl(var(--accent) / 0.15), transparent)" }}
+          />
         </motion.div>
 
-        {/* Expanding pulse rings */}
-        {[0, 1, 2, 3].map((i) => (
-          <motion.div
-            key={i}
-            className="absolute w-24 h-24 rounded-full border border-accent/25"
-            style={{ top: "50%", left: "50%", x: "-50%", y: "-50%" }}
-            initial={{ scale: 0.3, opacity: 0 }}
-            animate={{ scale: [0.3, 3, 5], opacity: [0.5, 0.12, 0] }}
-            transition={{ duration: 5, repeat: Infinity, delay: i * 1.2, ease: "easeOut" }}
-          />
-        ))}
+        {/* Ambient radial glow that follows rocket path */}
+        <motion.div
+          className="absolute left-1/2 -translate-x-1/2 w-40 h-40 rounded-full blur-3xl"
+          style={{ background: "hsl(var(--accent) / 0.08)" }}
+          animate={{ bottom: ["5%", "85%"] }}
+          transition={{ duration: 6, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
+        />
 
-        {/* Data particles rising along beam */}
-        {[...Array(6)].map((_, i) => (
+        {/* Rising particles along beam */}
+        {[...Array(5)].map((_, i) => (
           <motion.div
             key={`particle-${i}`}
-            className="absolute w-1 h-1 rounded-full bg-accent/60"
-            style={{ left: `calc(50% + ${(i % 2 === 0 ? -1 : 1) * (4 + i * 2)}px)` }}
-            initial={{ bottom: "30%", opacity: 0 }}
-            animate={{
-              bottom: ["30%", "70%"],
-              opacity: [0, 0.8, 0],
+            className="absolute w-1 h-1 rounded-full"
+            style={{
+              left: `calc(50% + ${(i % 2 === 0 ? -1 : 1) * (3 + i * 3)}px)`,
+              background: "hsl(var(--accent) / 0.6)",
             }}
+            animate={{ bottom: ["15%", "75%"], opacity: [0, 0.7, 0] }}
             transition={{
-              duration: 2.5 + i * 0.3,
+              duration: 3 + i * 0.4,
               repeat: Infinity,
-              delay: 2 + i * 0.5,
+              delay: i * 0.8,
               ease: "easeOut",
             }}
           />
         ))}
       </div>
 
+      {/* ── EXPANDING RIPPLE CIRCLES at top area ── */}
+      <div className="absolute top-[12%] left-1/2 -translate-x-1/2 pointer-events-none">
+        {[0, 1, 2, 3].map((i) => (
+          <motion.div
+            key={`ripple-${i}`}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{ border: "1px solid hsl(var(--accent) / 0.2)" }}
+            animate={{ width: [24, 280, 400], height: [24, 280, 400], opacity: [0.5, 0.1, 0] }}
+            transition={{ duration: 5, repeat: Infinity, delay: i * 1.2, ease: "easeOut" }}
+          />
+        ))}
+      </div>
+
       {/* ── HERO TEXT ── */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-        {/* Badge */}
+        {/* Main title — ET Edge */}
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8"
+          initial={{ opacity: 0, scale: 0.9, filter: "blur(12px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-6"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium text-accent tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-glow" />
-            AI-Powered Event Intelligence
-          </span>
+          <h1 className="font-display text-7xl sm:text-8xl md:text-9xl font-bold leading-[0.9] tracking-tight">
+            <span
+              className="inline-block"
+              style={{
+                background: "linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(var(--teal)))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                filter: "drop-shadow(0 0 30px hsl(var(--neon-cyan) / 0.3))",
+              }}
+            >
+              ET
+            </span>{" "}
+            <span
+              className="inline-block"
+              style={{
+                background: "linear-gradient(135deg, hsl(var(--electric-violet)), hsl(var(--deep-purple)))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                filter: "drop-shadow(0 0 30px hsl(var(--electric-violet) / 0.3))",
+              }}
+            >
+              Edge
+            </span>
+          </h1>
         </motion.div>
 
-        {/* Sequential headline */}
-        <div className="space-y-1 mb-8">
-          {["See the event", "before it becomes"].map((line, i) => (
-            <motion.h1
-              key={line}
-              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.9, delay: 0.8 + i * 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.0] tracking-tight text-foreground"
-            >
-              {line}
-            </motion.h1>
-          ))}
-          <motion.h1
-            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.9, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.0] tracking-tight text-gradient-primary"
-          >
-            everyone else's story
-          </motion.h1>
-        </div>
-
+        {/* Tagline */}
         <motion.p
           initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
+          transition={{ duration: 0.8, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
           style={{ textWrap: "pretty" } as React.CSSProperties}
         >
-          ET Edge uses AI to detect, explain, and simulate market-moving events
-          across Indian markets — so you act on insight, not noise.
+          See the event before it becomes everyone else's story.
         </motion.p>
 
+        {/* Login CTA */}
         <motion.button
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          onClick={() => navigate("/dashboard")}
-          className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-accent text-accent-foreground font-display font-semibold text-base transition-shadow duration-500 hover:shadow-[0_0_50px_hsl(var(--accent)/0.4)]"
+          onClick={() => navigate("/login")}
+          className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-display font-semibold text-base transition-shadow duration-500"
+          style={{
+            background: "hsl(var(--accent))",
+            color: "hsl(var(--accent-foreground))",
+            boxShadow: "0 0 0px hsl(var(--accent) / 0)",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 0 50px hsl(var(--accent) / 0.4)")}
+          onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "0 0 0px hsl(var(--accent) / 0)")}
         >
-          Enter Dashboard
+          Login
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </motion.button>
       </div>

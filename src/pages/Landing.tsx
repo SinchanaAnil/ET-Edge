@@ -35,10 +35,10 @@ const Landing = () => {
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/login")}
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl glass border border-accent/25 text-accent font-display font-semibold text-sm transition-shadow duration-500 hover:shadow-[0_0_30px_hsl(var(--accent)/0.2)]"
           >
-            Explore the Dashboard
+            Login
             <ArrowRight className="w-4 h-4" />
           </motion.button>
         </motion.div>
