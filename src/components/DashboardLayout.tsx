@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Activity, ArrowLeft } from "lucide-react";
 import CursorGlow from "@/components/CursorGlow";
 import DashboardNav from "@/components/DashboardNav";
+import etEdgeLogo from "@/assets/et-edge-logo.png";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
