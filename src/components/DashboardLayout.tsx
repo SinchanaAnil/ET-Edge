@@ -26,7 +26,11 @@ const DashboardLayout = () => {
           <ArrowLeft className="w-3.5 h-3.5" />
           Home
         </button>
-        <span className="font-display text-sm font-bold text-gradient-primary tracking-wide">ET Edge</span>
+        <span className="font-display text-sm font-bold tracking-wide">
+          <span style={{ background: "linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(var(--teal)))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>ET</span>
+          {" "}
+          <span style={{ background: "linear-gradient(135deg, hsl(var(--electric-violet)), hsl(var(--deep-purple)))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Edge</span>
+        </span>
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-1.5 text-xs text-accent">
             <Activity className="w-3 h-3" />
