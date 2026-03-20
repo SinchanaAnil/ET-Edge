@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Landing from "./pages/Landing.tsx";
+import Login from "./pages/Login.tsx";
 import DashboardLayout from "./components/DashboardLayout.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import EventIntelligence from "./pages/EventIntelligence.tsx";
